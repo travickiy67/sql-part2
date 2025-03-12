@@ -37,6 +37,12 @@ JOIN address a ON ss.address_id = a.address_id
 GROUP BY ss.manager_staff_id 
 HAVING COUNT(c.customer_id) > 300;
 ```
+<details>
+<summary>Скрин</summary>  
+
+![img](https://github.com/travickiy67/sql-part2/blob/main/img/img1.1.png)  
+
+</details>
 
 ### Задание 2
 
@@ -50,6 +56,13 @@ FROM film
 WHERE `length` > (SELECT AVG(`length`) from film);
 ```
 
+<details>
+<summary>Скрин</summary>  
+
+![img](https://github.com/travickiy67/sql-part2/blob/main/img/img2.1.png)  
+
+</details>
+
 ### Задание 3
 
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
@@ -61,6 +74,13 @@ GROUP BY MONTH(payment_date)
 ORDER BY COUNT(payment_id)  DESC
 LIMIT 1;
 ```
+<details>
+<summary>Скрин</summary>  
+
+![img](https://github.com/travickiy67/sql-part2/blob/main/img/img3.1.png)  
+
+</details>
+
 
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
@@ -79,14 +99,14 @@ FROM staff s
 JOIN payment p ON p.staff_id = s.staff_id 
 GROUP BY p.staff_id;
 ```
+<details>
+<summary>Скрин</summary>  
+
+![img](https://github.com/travickiy67/sql-part2/blob/main/img/img4.1.png)  
+
+</details>
+
 ### Задание 5*
 
 Найдите фильмы, которые ни разу не брали в аренду.
 
-```
-SELECT f.title AS 'Нет спроса'
-FROM sakila.film f
-LEFT JOIN sakila.inventory i ON f.film_id = i.film_id
-LEFT JOIN sakila.rental r ON i.inventory_id = r.inventory_id
-WHERE r.inventory_id IS NULL;
-```
