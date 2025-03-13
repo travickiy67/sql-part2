@@ -68,11 +68,12 @@ WHERE `length` > (SELECT AVG(`length`) from film);
 Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
 ```
-SELECT MONTH(payment_date) AS Месяц, COUNT(payment_id) As Платежи, SUM(amount) AS Количество
+SELECT DATE_FORMAT(payment_date, '%Y   %m') AS Дата, COUNT(payment_id) As Платежи, SUM(amount) AS Количество
 FROM payment
-GROUP BY MONTH(payment_date) 
+GROUP BY DATE_FORMAT(payment_date, '%Y   %m')
 ORDER BY COUNT(payment_id)  DESC
 LIMIT 1;
+
 ```
 <details>
 <summary>Скрин</summary>  
@@ -110,3 +111,17 @@ GROUP BY p.staff_id;
 
 Найдите фильмы, которые ни разу не брали в аренду.
 
+**Это решение есть в призентации.
+```
+SELECT f.title
+FROM film f
+LEFT JOIN inventory i ON i.film_id = f.film_id
+LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+WHERE r.rental_id IS NULL;
+```
+<details>
+<summary>Скрин</summary>  
+
+![img](https://github.com/travickiy67/sql-part2/blob/main/img/img5.1.png)  
+
+</details>
